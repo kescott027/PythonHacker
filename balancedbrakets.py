@@ -10,12 +10,9 @@ import sys
 
 
 def isBalanced(s):
-    def _check(c0, c1):
+    def _compliment(c0, c1):
         b = {"{": "}", "[": "]", "(": ")"}
-
-        if c0 not in b.keys():
-            return False
-        if b[c0] == c1:
+        if b.get(c0, -1) == c1:
             return True
         else:
             return False
@@ -28,23 +25,20 @@ def isBalanced(s):
             q.append(s[i])
 
     while len(q) > 0:
+        i = 0
         length = len(q)
-        #check inner
-        if _check(q[int(len(q)/2)-1], q[int(len(q)/2)]):
-            q = q[0:int(len(q)/2)-1] + q[int(len(q)/2)+1::]
-        #check first
-        elif _check(q[0], q[1]):
-            q = q[2::]
-        #check last
-        elif _check(q[-2], q[-1]):
-            q = q[0:-2]
-        #check outer
-        elif _check(q[0], q[-1]):
-            q = q[1:-1]
-        else:
-            if length <= len(q):
-                return 'NO'
 
+        while i < len(q)-1:
+            if _compliment(q[i], q[i+1]):
+                q.pop(i+1)
+                q.pop(i)
+            if len(q) == 0:
+                return 'YES'
+            else:
+                i += 1
+
+        if length <= len(q):
+            return 'NO'
     return 'YES'
 
 
