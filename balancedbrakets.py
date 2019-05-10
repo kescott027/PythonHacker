@@ -29,15 +29,15 @@ def isBalanced(s):
 
     while len(q) > 0:
         length = len(q)
+        #check inner
+        if _check(q[int(len(q)/2)-1], q[int(len(q)/2)]):
+            q = q[0:int(len(q)/2)-1] + q[int(len(q)/2)+1::]
         #check first
-        if _check(q[0], q[1]):
+        elif _check(q[0], q[1]):
             q = q[2::]
         #check last
         elif _check(q[-2], q[-1]):
             q = q[0:-2]
-        #check inner
-        elif _check(q[int(len(q)/2)-1], q[int(len(q)/2)]):
-            q = q[0:int(len(q)/2)-1] + q[int(len(q)/2)+1::]
         #check outer
         elif _check(q[0], q[-1]):
             q = q[1:-1]
@@ -51,10 +51,12 @@ def isBalanced(s):
 
 if __name__ == '__main__':
 
-    inputs = ['{[()]}', '{[(])}', '{{[[(())]]}}', '{{([])}}', '{{)[](}}', '{(([])[])[]}', '{(([])[])[]]}',
-              '{(([])[])[]}[]', '}][}}(}][))]', '[](){()}', '()', '({}([][]))[]()', '{)[](}]}]}))}(())(',
-              '([[)']
-    expected = ['YES', 'NO', 'YES', 'YES', 'NO', 'YES', 'NO', 'YES', 'NO', 'YES', 'YES', 'YES', 'NO', 'NO']
+    inputs = ['{}', '(){}', '}([[{)[]))]{){}[', '{}{()}{{}}', '{]]{()}{])', '{[()]}', '{[(])}', '{{[[(())]]}}',
+              '{{([])}}', '{{)[](}}', '{(([])[])[]}', '{(([])[])[]]}', '{(([])[])[]}[]', '}][}}(}][))]', '[](){()}',
+              '()', '({}([][]))[]()', '{)[](}]}]}))}(())(', '([[)']
+    expected = ['YES', 'YES', 'NO', 'YES', 'NO', 'YES', 'NO', 'YES',
+                'YES', 'NO', 'YES', 'NO', 'YES', 'NO', 'YES',
+                'YES', 'YES', 'NO', 'NO']
 
     case = range(0, len(inputs))
 
